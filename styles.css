@@ -288,6 +288,7 @@ noscript {
 
     #header-tiles {
         display: block;
+        margin: 0;
     }
 }
 
