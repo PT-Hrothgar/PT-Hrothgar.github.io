@@ -48,7 +48,7 @@
     font-family: 'Noto Sans Mono', monospace;
     font-weight: bold;
     background-color: var(--gray);
-    padding: 15px;
+    padding: 15px 5px;
     color: white;
     font-size: 38px;
     letter-spacing: 2px;
