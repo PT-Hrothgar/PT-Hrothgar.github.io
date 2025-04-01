@@ -5,7 +5,7 @@
   Please read the license at https://github.com/PT-Hrothgar/PT-Hrothgar.github.io/blob/main/LICENSE.
 */
 
-"use strict";
+'use strict';
 
 /*
   Return a new string with the character of 'orig' at index
