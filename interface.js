@@ -5,6 +5,8 @@
   Please read the license at https://github.com/PT-Hrothgar/PT-Hrothgar.github.io/blob/main/LICENSE.
 */
 
+"use strict";
+
 // Whether the user is currently able to add a new word, edit an existing word, etc.
 let enabled = true;
 // Number of words that currently exist
@@ -291,8 +293,8 @@ function checkInput(inputId) {
     // Set its class and id
     newWord.classList.add('word');
     newWord.id = 'word' + inputId;
-    // Variable for populating the new word with a child node for each letter
-    let text;
+    // Variables for populating a new word
+    let letter, text;
 
     // Get each letter of the word in turn
     for (let i = 0; i < 5; i++) {
