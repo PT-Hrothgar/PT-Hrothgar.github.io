@@ -44,7 +44,6 @@
 }
 
 #header {
-    grid-area: header;
     font-family: 'Noto Sans Mono', monospace;
     font-weight: bold;
     background-color: var(--gray);
@@ -65,6 +64,7 @@
 }
 
 select {
+    margin-top: 8px;
     padding: 10px;
 }
 
@@ -186,17 +186,22 @@ noscript {
     height: 70%;
 }
 
+#words-div, #output-div {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+}
+
 #words-div {
-    margin-left: 10px;
-    grid-area: wordsDiv;
+    left: 0;
+    padding-right: 30px;
 }
 
 #output-div {
-    margin-right: 10px;
     border: 1px solid black;
-    grid-area: outputDiv;
-    position: relative;
-    height: 550px;
+    left: 50%;
+    height: 592px;
     overflow-x: clip;
     overflow-y: auto;
 }
@@ -237,12 +242,9 @@ noscript {
 }
 
 #grid-container {
-    display: grid;
-    grid-template-areas:
-        'header header'
-        'wordsDiv outputDiv';
-    row-gap: 30px;
-    margin-bottom: 30px;
+    position: relative;
+    margin: 30px;
+    height: 715px;
 }
 
 #word-grid {
@@ -252,7 +254,7 @@ noscript {
     font-weight: bold;
 }
 
-.far, .fab, .fas {
+.word .far {
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
@@ -272,18 +274,17 @@ noscript {
     }
 
     #grid-container {
-        grid-template-areas:
-            'header header'
-            'wordsDiv wordsDiv'
-            'outputDiv outputDiv';
+        height: auto;
+        margin: 30px 8px;
+    }
+
+    #words-div, #output-div {
+        width: auto;
+        position: static;
     }
 
     #words-div {
-        margin-right: 10px;
-    }
-
-    #output-div {
-        margin-left: 10px;
+        padding-right: 0;
     }
 
     #header-tiles {
