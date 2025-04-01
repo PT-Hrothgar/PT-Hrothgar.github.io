@@ -5,7 +5,7 @@
   Please read the license at https://github.com/PT-Hrothgar/PT-Hrothgar.github.io/blob/main/LICENSE.
 */
 
-"use strict";
+'use strict';
 
 // Whether the user is currently able to add a new word, edit an existing word, etc.
 let enabled = true;
