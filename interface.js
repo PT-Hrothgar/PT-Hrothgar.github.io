@@ -12,7 +12,7 @@ let enabled = true;
 // Number of words that currently exist
 let wordCount = 0;
 // Maximum number of words the user is allowed to input
-const MAX_WORDS = 5;
+const MAX_WORDS = 8;
 // Key-value pairs for all the properties common to all text inputs
 const INPUT_PROPERTIES = {
     'autocomplete': 'off',
@@ -138,7 +138,7 @@ function getWordsFromDoc() {
         }
 
         // Record this word and this set of colors, as long as they both have length 5
-        if (newWord.length == 5 && newColor.length == 5) {
+        if (newWord.length === 5 && newColor.length === 5) {
             words.push(newWord);
             colors.push(newColor);
         }
@@ -161,7 +161,7 @@ function resetInput(input) {
     let result = '';
     // Go through the current value of this field
     for (let char of input.value) {
-        if (char.search(/[a-zA-Z]/) == -1 || result.length == 5) {
+        if (char.search(/[a-zA-Z]/) === -1 || result.length === 5) {
             // This character is non-alphabetic (or we've already
             // recorded 5 characters), so break out of this loop
             break;
@@ -226,9 +226,9 @@ function yellowAllowed(letter) {
         if (sibling === null) {
             // We got to the beginning of the word, so return true
             return true;
-        } else if (sibling.classList.contains('color-div')
-                && sibling.classList.contains('gray')
-                && sibling.innerHTML == letter.innerHTML) {
+        } else if (sibling.classList.contains('color-div') &&
+            sibling.classList.contains('gray') &&
+            sibling.innerHTML === letter.innerHTML) {
             return false;
         }
     }
@@ -256,9 +256,11 @@ function nextColor(letter) {
     } else if (letter.classList.contains('gray')) {
         letter.classList.remove('gray');
 
+        // See if this letter is allowed to be yellow or not
         if (yellowAllowed(letter)) {
             letter.classList.add('yellow');
         } else {
+            // Since it is not allowed to be yellow, go directly to green
             letter.classList.add('green');
         }
     } else {
@@ -275,7 +277,7 @@ function checkInput(inputId) {
     // Get the input element from the document
     const input = document.getElementById('input' + inputId);
 
-    if (input.value.search(/^[a-zA-Z]{0,5}$/) == -1) {
+    if (input.value.search(/^[a-zA-Z]{0,5}$/) === -1) {
         // This field contains non-alphabetic characters, so strip them
         resetInput(input);
     }
@@ -325,6 +327,9 @@ function checkInput(inputId) {
     // Turn them into icons with Font Awesome
     editBtn.classList.add('far', 'fa-edit');
     deleteBtn.classList.add('far', 'fa-trash-alt');
+    // Add titles to the icons
+    editBtn.title = 'Edit word';
+    deleteBtn.title = 'Delete word';
 
     // Add event listeners to the icons
     editBtn.addEventListener('click', function() {
@@ -373,7 +378,7 @@ function checkInput(inputId) {
     }
 
     // See where to insert the new word into the grid
-    let nextSibling = (inputId == wordCount) ? addWord : allWords[inputId];
+    let nextSibling = (inputId === wordCount) ? addWord : allWords[inputId];
     wordGrid.insertBefore(newWord, nextSibling);
 
     // Remove the <input> element
@@ -387,6 +392,10 @@ function checkInput(inputId) {
     show(document.getElementById('show-after-input'), 'block');
 }
 
+/*
+  Replace the word with the given id with a text input field,
+  so that the user can edit the word itself.
+*/
 function editWord(wordId) {
     // Disable the user interface
     disableInterface();
@@ -402,7 +411,7 @@ function editWord(wordId) {
     // Get the word grid
     const wordGrid = document.getElementById('word-grid');
     // Get the id of the element that will be the input's next sibling
-    let siblingId = (wordId + 1 == wordCount) ? 'add-word' : 'word' + (wordId + 1);
+    let siblingId = (wordId + 1 === wordCount) ? 'add-word' : 'word' + (wordId + 1);
 
     // Insert the input field into the grid
     wordGrid.insertBefore(newInput, document.getElementById(siblingId));
@@ -414,6 +423,10 @@ function editWord(wordId) {
     wordCount--;
 }
 
+/*
+  Delete the word with the given id from the document,
+  and update the ids of the remaining words accordingly.
+*/
 function deleteWord(wordId) {
     // Remove this word
     document.getElementById('word' + wordId).remove();
@@ -461,7 +474,7 @@ function enableInterface() {
     // Loop through all the icons
     for (let i of document.getElementsByClassName('far')) {
         // If this is the 'delete' button for the only existing word, it must NOT be enabled
-        if (i.classList.contains('fa-trash-alt') && wordCount == 1) {
+        if (i.classList.contains('fa-trash-alt') && wordCount === 1) {
             // Add the 'no-click' class if it does not already exist
             if (!i.classList.contains('no-click')) {
                 i.classList.add('no-click');
@@ -505,12 +518,24 @@ function addWord() {
     newInput.focus();
 }
 
+/*
+  Display a message in the output section of the
+  document, telling the user that only the top 75
+  (of the given number) of results are being shown.
+*/
 function recordOverflow(overflowNo) {
+    // This <span> element should contain the number itself
     document.getElementById('overflow-no').innerHTML = overflowNo;
+    // Show the paragraph containing it
     show(document.getElementById('overflow'), 'block');
 }
 
+/*
+  Write the words in the given array to the given DOM element, delimited by line breaks
+  and with numbered indexes starting from the given start point, which defaults to 1.
+*/
 function writeWords(wordList, target, start = 1) {
+    // Check parameters
     if (typeof wordList != 'object') {
         throw 'Expected array of words';
     }
@@ -518,50 +543,75 @@ function writeWords(wordList, target, start = 1) {
         throw 'Expected DOM object';
     }
 
+    // The text we'll write to the given target
     let text = '';
 
+    // Loop through the given array of words
     for (let i = 0; i < wordList.length; i++) {
+        // Concatenate a string to 'text' that looks like, for example, '1. CYBER<br>'
         text += i + start + '. ' + wordList[i] + '<br>';
     }
 
+    // Write the text to the given target
     target.innerHTML = text;
 }
 
+/*
+  Find all the possibilities from the target word,
+  and write them to the output section of the document.
+*/
 function getResults() {
+    // Get the results themselves
     let results = getWordsFromDoc();
 
+    // If there are no results, show the message that says so, and hide whatever results may be showing
     if (results.length === 0) {
         show(document.getElementById('no-words-found'), 'block');
         hide(document.getElementById('words-found'));
         return;
     }
 
+    // If there is an overflow, show the message that says so, and cut off any extra words
     if (results.length > 75) {
         recordOverflow(results.length);
         results = results.slice(0, 75);
     } else {
+        // If there is not an overflow, hide the message that says there is
         hide(document.getElementById('overflow'));
     }
 
+    // Show the element that contains the results themselves
     show(document.getElementById('words-found'));
+    // Hide the element that says there are no results
     hide(document.getElementById('no-words-found'));
 
-    if (document.getElementById('sortmethod').value == 'yes') {
+    // Check the 'sortmethod' select field
+    if (document.getElementById('sortmethod').value === 'yes') {
+        // Sort the results by number of repeated letters
         results.sort((a, b) => repeatedLetters(a) - repeatedLetters(b));
     }
 
+    // See if there are 0, 1, or 2 words more than a multiple of 3
     const extras = results.length % 3;
+    // See how many words will be in each of the three arrays
     const arrayLength = (results.length - extras) / 3;
-    let break1 = arrayLength, break2 = arrayLength * 2;
+    // Determine where to split the original array to make it into three smaller, equally sized arrays
+    let break1 = arrayLength,
+        break2 = arrayLength * 2;
 
-    if (extras == 2) {
+    if (extras === 2) {
+        // If there are two words left over, record that the first and second
+        // arrays will both have 1 element extra by moving up both breaks
         break1 += 1;
         break2 += 2;
-    } else if (extras == 1) {
+    } else if (extras === 1) {
+        // If there is one word left over, record that the first array
+        // will have 1 element extra by moving up both breaks
         break1 += 1;
         break2 += 1;
     }
 
+    // Write each of the three sections of the array of results to one of the three output areas
     writeWords(results.slice(0, break1), document.getElementById('output1'));
     writeWords(results.slice(break1, break2), document.getElementById('output2'), break1 + 1);
     writeWords(results.slice(break2), document.getElementById('output3'), break2 + 1);
@@ -570,6 +620,7 @@ function getResults() {
 // Add the input for the first word automatically
 document.addEventListener('DOMContentLoaded', addWord);
 
+// Add an event listener to the 'Find Results' button, that finds the results
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#find-results button').addEventListener('click', getResults);
 });
