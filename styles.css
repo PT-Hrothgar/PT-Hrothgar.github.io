@@ -264,7 +264,7 @@ noscript {
 
 .no-click {
     color: lightgray;
-    cursor: not-allowed;
+    cursor: not-allowed !important;
 }
 
 @media screen and (max-width: 800px) {
