@@ -2,7 +2,7 @@
   User interface functions.
 
   Copyright (c) 2025 Philip E. Turner. This file is licensed under the Apache License 2.0.
-  Please read the license at https://PT-Hrothgar.github.io/LICENSE.
+  Please read the license at https://PT-Hrothgar.github.io/LICENSE.txt.
 */
 
 'use strict';
