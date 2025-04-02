@@ -1,8 +1,8 @@
 /*
   Backend functions, that do not directly relate to the document.
 
-  Copyright (c) 2025 Philip E. Turner. This file is licensed under the GNU General Public License v3.0.
-  Please read the license at https://github.com/PT-Hrothgar/PT-Hrothgar.github.io/blob/main/LICENSE.
+  Copyright (c) 2025 Philip E. Turner. This file is licensed under the Apache License 2.0.
+  Please read the license at https://PT-Hrothgar.github.io/LICENSE.
 */
 
 'use strict';
