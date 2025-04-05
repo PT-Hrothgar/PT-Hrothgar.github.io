@@ -205,9 +205,37 @@ function hide(elem) {
 }
 
 /*
-  See if the given letter can legally be yellow, according to the Wordle algorithm.
+  Determine if the given letter can legally be gray, according to the Wordle algorithm.
 
-  Return false if the given letter has a sibling identical to itself that is gray.
+  Return false if the given letter has a following sibling identical to itself that is yellow.
+*/
+function grayAllowed(letter) {
+    // Check the parameter
+    if (letter.classList === undefined) {
+        throw 'Expected DOM element';
+    }
+    if (!letter.classList.contains('color-div')) {
+        throw 'Expected letter with class="color-div"';
+    }
+
+    let sibling = letter;
+
+    // Go one element further forward in the given letter's siblings each iteration
+    while (true) {
+        sibling = sibling.nextElementSibling;
+        if (sibling === null || !sibling.classList.contains('color-div')) {
+            // We got to the end of the word, so return true
+            return true;
+        } else if (sibling.classList.contains('yellow') && sibling.innerHTML === letter.innerHTML) {
+            return false;
+        }
+    }
+}
+
+/*
+  Determine if the given letter can legally be yellow, according to the Wordle algorithm.
+
+  Return false if the given letter has a previous sibling identical to itself that is gray.
 */
 function yellowAllowed(letter) {
     // Check the parameter
@@ -223,12 +251,10 @@ function yellowAllowed(letter) {
     // Go one element further back in the given letter's siblings each iteration
     while (true) {
         sibling = sibling.previousElementSibling;
-        if (sibling === null) {
+        if (sibling === null || !sibling.classList.contains('color-div')) {
             // We got to the beginning of the word, so return true
             return true;
-        } else if (sibling.classList.contains('color-div') &&
-            sibling.classList.contains('gray') &&
-            sibling.innerHTML === letter.innerHTML) {
+        } else if (sibling.classList.contains('gray') && sibling.innerHTML === letter.innerHTML) {
             return false;
         }
     }
@@ -236,7 +262,7 @@ function yellowAllowed(letter) {
 
 /*
   Change the given letter to the next available color.
-  Change yellow to green, green to gray, and gray to yellow or green, as appropriate.
+  Change yellow to green, green to gray or yellow, and gray to yellow or green, as appropriate.
 */
 function nextColor(letter) {
     // Check the parameter
@@ -252,7 +278,14 @@ function nextColor(letter) {
         letter.classList.add('green');
     } else if (letter.classList.contains('green')) {
         letter.classList.remove('green');
-        letter.classList.add('gray');
+
+        // See if this letter is allowed to be gray or not
+        if (grayAllowed(letter)) {
+            letter.classList.add('gray');
+        } else {
+            // Since it is not allowed to be gray, go directly to yellow
+            letter.classList.add('yellow');
+        }
     } else if (letter.classList.contains('gray')) {
         letter.classList.remove('gray');
 
@@ -377,7 +410,7 @@ function checkInput(inputId) {
         newWord.appendChild(warning);
     }
 
-    // See where to insert the new word into the grid
+    // Determine where to insert the new word into the grid
     let nextSibling = (inputId === wordCount) ? addWord : allWords[inputId];
     wordGrid.insertBefore(newWord, nextSibling);
 
@@ -593,7 +626,7 @@ function getResults() {
 
     // See if there are 0, 1, or 2 words more than a multiple of 3
     const extras = results.length % 3;
-    // See how many words will be in each of the three arrays
+    // Determine how many words will be in each of the three arrays
     const arrayLength = (results.length - extras) / 3;
     // Determine where to split the original array to make it into three smaller, equally sized arrays
     let break1 = arrayLength,
