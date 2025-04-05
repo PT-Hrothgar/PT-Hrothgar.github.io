@@ -53,6 +53,11 @@
     letter-spacing: 2px;
 }
 
+#header a {
+    text-decoration: none;
+    color: white;
+}
+
 #header .color-div {
     border-color: var(--gray);
     font-size: inherit;
