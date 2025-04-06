@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Get help solving the popular online game Wordle. Enter the guesses you've made and select a color for each letter to find all the different possibilities for the word you're trying to guess.">
+        <meta name="keywords" content="Wordle, solver, free">
+        <meta property="og:title" content="Wordle Master">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://PT-Hrothgar.github.io/">
+        <meta property="og:description" content="Get help solving the popular online game Wordle. Enter the guesses you've made and select a color for each letter to find all the different possibilities for the word you're trying to guess.">
+        <meta property="og:image" content="https://PT-Hrothgar.github.io/wordlemaster.png">
+        <meta property="og:image:width" content="1024">
+        <meta property="og:image:height" content="509">
+        <meta property="og:image:alt" content="Wordle Master at work">
+        <title>Wordle Master</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://kit.fontawesome.com/9656c36908.js" crossorigin="anonymous"></script>
+        <script src="words.js"></script>
+        <script src="wordle.js"></script>
+        <script src="interface.js"></script>
+    </head>
+
+    <body>
+        <div id="content-js-only">
+            <header id="header">
+                <p><a href="/">WORDLE<span id="header-tiles"><span class="color-div green">M</span><span class="color-div green">A</span><span class="color-div green">S</span><span class="color-div green">T</span><span class="color-div green">E</span><span class="color-div green">R</span></span></a></p>
+            </header>
+
+            <div id="grid-container">
+                <section id="words-div">
+                    <h3>Enter the guesses you've made:</h3>
+                    <div id="word-grid">
+                        <div class="color-div" id="add-word" title="Add word">+</div>
+                    </div>
+                    <p id="show-after-input">Click any letter to change its color.</p>
+                    <div id="go">
+                        <br><hr><br>
+                        Sort results by:
+                        <select id="sortmethod">
+                            <option value="no">Words with common letters first</option>
+                            <option value="yes">Words with no repeated letters first, then sorted as above</option>
+                        </select>
+
+                        <p id="find-results"><button>FIND RESULTS</button></p>
+                    </div>
+                </section>
+
+                <section id="output-div">
+                    <h3>Possible Words</h3>
+                    <p id="no-words-found">No results found. Please check your inputs and try again!</p>
+                    <div id="words-found">
+                        <p id="overflow">Showing only the top 75 of <span id="overflow-no"></span> results.</p>
+                        <div id="output1"></div>
+                        <div id="output2"></div>
+                        <div id="output3"></div>
+                    </div>
+                </section>
+            </div>
+
+            <footer id="footer">
+                Copyright © 2025 by Philip E. Turner. <a href="about_license.html">License</a><br>
+                We do not use any cookies, or collect or store any information. (This is a static website.)
+            </footer>
+        </div>
+
+        <noscript>
+            <div class="noscript">
+                <h2>We need JavaScript in order to run!</h2><br>
+                <p>Please enable JavaScript for this site in your browser settings to enjoy Wordle Master.</p>
+            </div>
+        </noscript>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                show(document.getElementById('content-js-only'));
+                document.getElementById('add-word').addEventListener('click', addWord);
+            });
+        </script>
+    </body>
+</html>
