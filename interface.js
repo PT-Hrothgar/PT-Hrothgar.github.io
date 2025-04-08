@@ -482,7 +482,7 @@ function deleteWord(wordId) {
 */
 function disableInterface() {
     // Disable each of the icons
-    for (let i of document.getElementsByClassName('far')) {
+    for (let i of document.querySelectorAll('.word .far')) {
         // Add the 'no-click' class to the icon if it doesn't have it already.
         // This class turns the icon light gray and sets the cursor to 'not-allowed',
         // to strongly hint to the user that it won't do anything.
@@ -505,7 +505,7 @@ function disableInterface() {
 */
 function enableInterface() {
     // Loop through all the icons
-    for (let i of document.getElementsByClassName('far')) {
+    for (let i of document.querySelectorAll('.word .far')) {
         // If this is the 'delete' button for the only existing word, it must NOT be enabled
         if (i.classList.contains('fa-trash-alt') && wordCount === 1) {
             // Add the 'no-click' class if it does not already exist
