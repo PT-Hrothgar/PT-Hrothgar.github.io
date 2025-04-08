@@ -650,10 +650,15 @@ function getResults() {
     writeWords(results.slice(break2), document.getElementById('output3'), break2 + 1);
 }
 
-// Add the input for the first word automatically
-document.addEventListener('DOMContentLoaded', addWord);
-
-// Add an event listener to the 'Find Results' button, that finds the results
 document.addEventListener('DOMContentLoaded', function() {
+    // Add the input for the first word automatically
+    addWord();
+
+    // Add an event listener to the 'Find Results' button, that finds the results
     document.querySelector('#find-results button').addEventListener('click', getResults);
+
+    // Add an event listener to the link to the user guide that makes it scroll smoothly into view
+    document.getElementById('to-user-guide').addEventListener('click', function() {
+        document.getElementById('user-guide').scrollIntoView({'behavior': 'smooth', 'block': 'start'});
+    });
 });
