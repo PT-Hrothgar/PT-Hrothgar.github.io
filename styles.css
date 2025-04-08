@@ -79,6 +79,12 @@
     text-align: center;
 }
 
+#to-user-guide {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #00e;
+}
+
 #user-guide h1, #user-guide h2 {
     font-family: 'Noto Sans Mono', monospace;
 }
