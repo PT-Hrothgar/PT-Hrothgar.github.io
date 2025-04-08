@@ -68,6 +68,50 @@
     letter-spacing: initial;
 }
 
+#user-guide {
+    max-width: 900px;
+    margin: 10px auto 25px;
+    text-align: left;
+}
+
+.img-container {
+    margin: 10px;
+    text-align: center;
+}
+
+#user-guide h1, #user-guide h2 {
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+#user-guide h1, #user-guide h2, #user-guide h6 {
+    text-align: center;
+}
+
+#user-guide h1, #user-guide h2, #user-guide h6, #user-guide p {
+    padding: 10px;
+    line-height: 150%;
+}
+
+#user-guide h1 {
+    font-size: 35px;
+}
+
+#user-guide h2 {
+    font-size: 30px;
+}
+
+#user-guide h6 {
+    font-size: 18px;
+}
+
+.heading-join-top {
+    padding-bottom: 0 !important;
+}
+
+.heading-join-bottom {
+    padding-top: 0 !important;
+}
+
 select {
     margin-top: 8px;
     padding: 10px;
@@ -156,9 +200,18 @@ select {
     margin-right: 315px;
     margin-top: 2px;
     cursor: pointer;
+}
+
+#add-word, #demo-add-word {
     background-color: white;
     color: black;
     border-color: black;
+}
+
+#demo-add-word {
+    display: inline;
+    font-size: 28px;
+    padding: 1px 12px;
 }
 
 .green {
@@ -295,6 +348,10 @@ noscript {
     #header-tiles {
         display: block;
         margin: 0;
+    }
+
+    #output-div {
+        margin-top: 10px;
     }
 }
 
