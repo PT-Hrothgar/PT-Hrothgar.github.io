@@ -250,6 +250,10 @@ noscript {
     height: 70%;
 }
 
+option[disabled='disabled'] {
+    color: black;
+}
+
 #words-div, #output-div {
     width: 50%;
     position: absolute;
@@ -378,6 +382,23 @@ noscript {
     .mobile-only {
         display: block;
         visibility: visible;
+    }
+
+    #header, .color-div {
+        font-size: 28px;
+    }
+
+    .color-div {
+        padding: 3px 16px;
+    }
+
+    .word .far {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    #add-word {
+        margin-right: 272px;
     }
 }
 
