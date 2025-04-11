@@ -525,7 +525,7 @@ function enableInterface() {
         show(document.getElementById('add-word'), 'inline-block');
     }
     // Show the button that solves the puzzle
-    show(document.getElementById('go'));
+    show(document.getElementById('go'), 'block');
     // Set this global variable
     enabled = true;
 }
@@ -614,7 +614,7 @@ function getResults() {
     }
 
     // Show the element that contains the results themselves
-    show(document.getElementById('words-found'));
+    show(document.getElementById('words-found'), 'block');
     // Hide the element that says there are no results
     hide(document.getElementById('no-words-found'));
 
