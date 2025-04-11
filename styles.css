@@ -215,9 +215,9 @@ select {
 }
 
 #demo-add-word {
-    display: inline;
-    font-size: 28px;
-    padding: 1px 12px;
+    display: inline-block;
+    font-size: 34px;
+    padding: 10px 12px;
 }
 
 .green {
@@ -331,7 +331,17 @@ noscript {
     cursor: not-allowed !important;
 }
 
-@media screen and (max-width: 800px) {
+.no-mobile {
+    display: block;
+    visibility: visible;
+}
+
+.mobile-only {
+    display: none;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 900px) {
     noscript {
         top: 25%;
         height: 60%;
@@ -358,6 +368,16 @@ noscript {
 
     #output-div {
         margin-top: 10px;
+    }
+
+    .no-mobile {
+        display: none;
+        visibility: hidden;
+    }
+
+    .mobile-only {
+        display: block;
+        visibility: visible;
     }
 }
 
