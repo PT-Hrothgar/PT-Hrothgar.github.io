@@ -400,6 +400,10 @@ option[disabled='disabled'] {
     #add-word {
         margin-right: 272px;
     }
+
+    #output1, #output2, #output3 {
+        font-size: 14px;
+    }
 }
 
 #content-js-only, #show-after-input, #add-word, #no-words-found, #go, #overflow {
