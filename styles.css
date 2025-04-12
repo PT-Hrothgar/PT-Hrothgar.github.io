@@ -250,10 +250,6 @@ noscript {
     height: 70%;
 }
 
-option[disabled='disabled'] {
-    color: black;
-}
-
 #words-div, #output-div {
     width: 50%;
     position: absolute;
