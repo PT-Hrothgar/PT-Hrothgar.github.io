@@ -419,4 +419,5 @@ option[disabled='disabled'] {
 body {
     font-family: 'Encode Sans Expanded', Verdana, arial;
     text-align: center;
+    overflow-x: clip;
 }
