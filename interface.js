@@ -657,6 +657,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add an event listener to the 'Find Results' button, that finds the results
     document.querySelector('#find-results button').addEventListener('click', getResults);
 
+    // Add an event listener to the 'Add Word' button, that adds a new word
+    document.getElementById('add-word').addEventListener('click', addWord);
+
     // Add an event listener to the link to the user guide that makes it scroll smoothly into view
     document.getElementById('to-user-guide').addEventListener('click', function() {
         document.getElementById('user-guide').scrollIntoView({'behavior': 'smooth', 'block': 'start'});
