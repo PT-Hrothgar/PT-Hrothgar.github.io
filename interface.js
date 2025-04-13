@@ -31,10 +31,13 @@ function createInputField(inputId) {
     // Set the input's id and class
     newInput.classList.add('word-input');
     newInput.id = 'input' + inputId;
-    // The 'oninput' and 'placeholder' attributes have to
-    // contain the input's id, so we'll set them here
-    newInput.setAttribute('oninput', 'checkInput(' + inputId + ')');
+    // The 'placeholder' attribute has to contain the input's id, so we'll set it here
     newInput.setAttribute('placeholder', 'Guess #' + (inputId + 1));
+
+    // Add an event listener for input into the field
+    newInput.addEventListener('input', function() {
+        checkInput(Number(this.id[5]));
+    });
 
     // Make sure that the input responds to Enter/Return being pressed
     newInput.addEventListener('keydown', function(key) {
