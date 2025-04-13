@@ -381,7 +381,7 @@ noscript {
         visibility: visible;
     }
 
-    #header, .color-div {
+    #header, #header p, .color-div, .word-input {
         font-size: 28px;
     }
 
@@ -398,7 +398,7 @@ noscript {
         margin-right: 272px;
     }
 
-    #output1, #output2, #output3, #user-guide {
+    #output1, #output2, #output3, p {
         font-size: 14px;
     }
 }
