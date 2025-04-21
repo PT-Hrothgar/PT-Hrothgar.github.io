@@ -38,12 +38,18 @@
                     <p id="show-after-input">Click any letter to change its color.</p>
                     <div id="go">
                         <br><hr><br>
-                        Sort results by:
-                        <select id="sortmethod">
-                            <option value="no">Words with common letters first</option>
-                            <option value="yes">Words with no repeated letters first,</option>
-                            <option disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then sorted as above</option>
-                        </select>
+                        <p>Sort results by:</p>
+
+                        <div class="radio-container">
+                            <p>
+                                <input checked id="first" name="sortmethod" type="radio" value="no">
+                                <label for="first">Words with common letters first</label>
+                            </p>
+                            <p>
+                                <input id="second" name="sortmethod" type="radio" value="yes">
+                                <label for="second">Words with no repeated letters first, then sorted as above</label>
+                            </p>
+                        </div>
 
                         <p id="find-results"><button>FIND RESULTS</button></p>
                         <br><hr><br>
@@ -164,7 +170,7 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                show(document.getElementById('content-js-only'), 'block');
+                show(document.getElementById('content-js-only'));
             });
         </script>
     </body>
