@@ -180,17 +180,17 @@ function resetInput(input) {
 
 /*
   Show the specified DOM element by setting its CSS 'display'
-  property to the specified value, which defaults to 'initial',
-  and its 'visibility' property to 'initial'.
+  property to the specified value, which defaults to 'block',
+  and its 'visibility' property to 'visible'.
 */
-function show(elem, displayValue = 'initial') {
+function show(elem, displayValue = 'block') {
     // Ensure that we have a DOM element
     if (elem.style === undefined) {
         throw 'Expected DOM element';
     }
 
     elem.style.display = displayValue;
-    elem.style.visibility = 'initial';
+    elem.style.visibility = 'visible';
 }
 
 /*
@@ -425,7 +425,7 @@ function checkInput(inputId) {
     enableInterface();
     // Show this DOM element that contains instructions
     // to the user for changing the colors of letters
-    show(document.getElementById('show-after-input'), 'block');
+    show(document.getElementById('show-after-input'));
 }
 
 /*
@@ -528,7 +528,7 @@ function enableInterface() {
         show(document.getElementById('add-word'), 'inline-block');
     }
     // Show the button that solves the puzzle
-    show(document.getElementById('go'), 'block');
+    show(document.getElementById('go'));
     // Set this global variable
     enabled = true;
 }
@@ -563,7 +563,7 @@ function recordOverflow(overflowNo) {
     // This <span> element should contain the number itself
     document.getElementById('overflow-no').innerHTML = overflowNo;
     // Show the paragraph containing it
-    show(document.getElementById('overflow'), 'block');
+    show(document.getElementById('overflow'));
 }
 
 /*
@@ -602,7 +602,7 @@ function getResults() {
 
     // If there are no results, show the message that says so, and hide whatever results may be showing
     if (results.length === 0) {
-        show(document.getElementById('no-words-found'), 'block');
+        show(document.getElementById('no-words-found'));
         hide(document.getElementById('words-found'));
         return;
     }
@@ -617,12 +617,12 @@ function getResults() {
     }
 
     // Show the element that contains the results themselves
-    show(document.getElementById('words-found'), 'block');
+    show(document.getElementById('words-found'));
     // Hide the element that says there are no results
     hide(document.getElementById('no-words-found'));
 
-    // Check the 'sortmethod' select field
-    if (document.getElementById('sortmethod').value === 'yes') {
+    // Check the 'sortmethod' radio input
+    if (document.querySelector('input[name="sortmethod"]:checked').value === 'yes') {
         // Sort the results by number of repeated letters
         results.sort((a, b) => repeatedLetters(a) - repeatedLetters(b));
     }
