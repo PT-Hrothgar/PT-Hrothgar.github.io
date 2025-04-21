@@ -119,9 +119,18 @@
     padding-top: 0 !important;
 }
 
-select {
-    margin-top: 8px;
-    padding: 10px;
+label {
+    font-size: 12px;
+}
+
+.radio-container {
+    margin: auto;
+    width: fit-content;
+    padding: 8px;
+}
+
+.radio-container p {
+    text-align: left;
 }
 
 #find-results {
@@ -350,7 +359,8 @@ noscript {
 
     #grid-container {
         height: auto;
-        margin: 30px 8px;
+        margin: 30px auto;
+        width: 93%;
     }
 
     #words-div, #output-div {
