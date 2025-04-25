@@ -15,10 +15,10 @@ let wordCount = 0;
 const MAX_WORDS = 8;
 // Key-value pairs for all the properties common to all text inputs
 const INPUT_PROPERTIES = {
-    'autocomplete': 'off',
-    'autofocus': 'autofocus',
-    'maxlength': '5',
-    'size': 8
+    autocomplete: 'off',
+    autofocus: 'autofocus',
+    maxlength: '5',
+    size: 8
 };
 
 /*
@@ -665,6 +665,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add an event listener to the link to the user guide that makes it scroll smoothly into view
     document.getElementById('to-user-guide').addEventListener('click', function() {
-        document.getElementById('user-guide').scrollIntoView({'behavior': 'smooth', 'block': 'start'});
+        document.getElementById('user-guide').scrollIntoView({
+            'behavior': 'smooth',
+            'block': 'start'
+        });
     });
 });
