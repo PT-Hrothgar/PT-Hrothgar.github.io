@@ -158,7 +158,6 @@ label {
 }
 
 .color-div {
-    text-align: center;
     display: inline-block;
     color: white;
     border: 2px solid white;
@@ -173,7 +172,6 @@ label {
     margin-bottom: 6px;
     background-color: var(--err-mid-red);
     color: var(--err-dark-red);
-    text-align: center;
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
@@ -245,7 +243,6 @@ label {
     padding-top: 20px;
     border: 1px solid var(--err-mid-red);
     background-color: var(--err-light-red);
-    text-align: center;
     position: absolute;
     width: 100%;
     height: 100%;
