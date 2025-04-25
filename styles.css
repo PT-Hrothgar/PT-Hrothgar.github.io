@@ -69,10 +69,9 @@
 }
 
 #user-guide {
-    max-width: 900px;
     margin: 10px auto 25px;
     text-align: left;
-    width: 95%;
+    width: min(95%, 900px);
 }
 
 .img-container {
