@@ -47,7 +47,7 @@ function createInputField(inputId) {
     });
 
     // Set the properties defined at the top of the file
-    // (They are common to all input field's; they do not have tocontain the input's id)
+    // (They are common to all input fields; they do not have to contain the input's id)
     for (let property in INPUT_PROPERTIES) {
         newInput.setAttribute(property, INPUT_PROPERTIES[property]);
     }
@@ -179,9 +179,9 @@ function resetInput(input) {
 }
 
 /*
-  Show the specified DOM element by setting its CSS 'display'
-  property to the specified value, which defaults to 'block',
-  and its 'visibility' property to 'visible'.
+  Show the given DOM element by setting its CSS 'display' property
+  to the specified value, which defaults to 'block', and its
+  'visibility' property to 'visible'.
 */
 function show(elem, displayValue = 'block') {
     // Ensure that we have a DOM element
@@ -194,8 +194,8 @@ function show(elem, displayValue = 'block') {
 }
 
 /*
-  Hide the specified DOM element by setting its CSS 'display'
-  property to 'none', and its 'visibility' property to 'hidden'.
+  Hide the give  DOM element by setting its CSS 'display' property
+  to 'none', and its 'visibility' property to 'hidden'.
 */
 function hide(elem) {
     // Ensure that we have a DOM element
@@ -455,7 +455,7 @@ function editWord(wordId) {
     // Give the input field focus
     newInput.focus();
 
-    // Decrement the number of words that exist
+    // Decrement the number of existing words
     wordCount--;
 }
 
