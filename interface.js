@@ -194,7 +194,7 @@ function show(elem, displayValue = 'block') {
 }
 
 /*
-  Hide the give  DOM element by setting its CSS 'display' property
+  Hide the given DOM element by setting its CSS 'display' property
   to 'none', and its 'visibility' property to 'hidden'.
 */
 function hide(elem) {
