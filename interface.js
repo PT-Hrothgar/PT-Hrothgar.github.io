@@ -607,6 +607,12 @@ function getResults() {
         return;
     }
 
+    // Check the 'sortmethod' radio input
+    if (document.querySelector('input[name="sortmethod"]:checked').value === 'yes') {
+        // Sort the results by number of repeated letters
+        results.sort((a, b) => repeatedLetters(a) - repeatedLetters(b));
+    }
+
     // If there is an overflow, show the message that says so, and cut off any extra words
     if (results.length > 75) {
         recordOverflow(results.length);
@@ -620,12 +626,6 @@ function getResults() {
     show(document.getElementById('words-found'));
     // Hide the element that says there are no results
     hide(document.getElementById('no-words-found'));
-
-    // Check the 'sortmethod' radio input
-    if (document.querySelector('input[name="sortmethod"]:checked').value === 'yes') {
-        // Sort the results by number of repeated letters
-        results.sort((a, b) => repeatedLetters(a) - repeatedLetters(b));
-    }
 
     // See if there are 0, 1, or 2 words more than a multiple of 3
     const extras = results.length % 3;
