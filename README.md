@@ -7,3 +7,8 @@ Suppose you were three guesses into a Wordle game and it looked like this:
 
 On your own, you might have quite a bit of trouble thinking of a Wordle guess that contains R, E, and Y (but not in those positions), and that does not contain any of the letters that are gray above.  
 This is what Wordle Master is designed for. You can go to [https://PT-Hrothgar.github.io](https://PT-Hrothgar.github.io), where it is hosted with GitHub Pages, and type in these three words. Then all you have to do is click on the R, E, and Y and select "Find Results" to find the one possible solution to this puzzle.
+
+Here is a description of each of the files and what they do.
+
+##### index.html
+This is, of course, the main HTML file that defines the page itself.
