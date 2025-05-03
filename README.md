@@ -8,7 +8,7 @@ Suppose you were three guesses into a Wordle game, and it looked like this:
 On your own, you might have quite a bit of trouble thinking of a Wordle guess that contains R, E, and Y (but not in those positions), and that does not contain any of the letters that are gray above.  
 This is what Wordle Master is designed for. You can go to [https://PT-Hrothgar.github.io](https://PT-Hrothgar.github.io), where it is hosted with GitHub Pages, and type in these three words. Then all you have to do is click on the R, E, and Y to turn them yellow, and select "Find Results" to find the one possible solution to this puzzle.
 
-Here is a description of each of Wordle Master's files and what they do.
+Wordle Master is a front-end web application that runs entirely with client-side JavaScript. Here are its files.
 
 ##### index.html
 This is, of course, the main HTML file that defines the page itself. It links to all the other pages (`styles.css`, `words.js`, `wordle.js`, and `interface.js`) to get them working, defines the document tree and all the DOM elements that `interface.js` expects to find, and contains the user guide. It also links to my Font Awesome kit so that we can use FA icons on the "edit" and "delete" buttons. There is a copyright notice at the bottom of the page with a link to `about_license.html`, which itself contains a link to `LICENSE.txt`.
@@ -17,6 +17,7 @@ I decided during development that if somebody is visiting Wordle Master with Jav
 
 ##### styles.css
 Here is all the not-super-interesting CSS that is so essential for the page layout. This file's most notable features are the following:  
+- Links to the Google fonts Encode Sans Expanded, used for most of the page, and Noto Sans Mono, used for the headers and the inputted guesses.
 - `@property` rules used to define the gray, yellow, and green colors used on Wordle guesses, and that Wordle Master also uses as theme colors (for example, in the header). They match the colors used by Wordle itself.
 - Red and pink "error" colors, also defined with `@property`. They are used in the `<noscript>` element described above, and in the "Not in word list" warnings.
 - A media query to switch to a one-column layout on smaller screens (<900px), and to slightly decrease font sizes to make the page less cramped.
@@ -34,3 +35,25 @@ Note that the output words are already sorted by how common their letters are. I
 This file and `interface.js` are really the heart of Wordle Master, the most interesting and important parts. They are both written in strict mode. Broadly speaking, this file accomplishes the abstract tasks that have nothing to do with the document itself, such as generating feedback for a given Wordle guess, and actually choosing the words to output from the `outputWords` array defined in `words.js`.
 
 The way the results are found is this: `interface.js` reads the input words and their colors from the document into two arrays of equal length. `wordle.js` checks each one of the `outputWords`, seeing if it would generate the given colors for the given input words as feedback if it was the target word. To me, this method - looking at each output word and saying, "Is this a possibility?" - seemed much simpler and more straightforward than somehow parsing the inputs to determine what a result *would* look like.
+
+This file also contains a function, `repeatedLetters()`, that returns the number of repeated letters in a given word. `interface.js` uses this function to sort the results by number of repeated letters, if the user so chooses.
+
+##### interface.js
+Here we have all the functions relating to the document, and particularly to the user interface. Among other things, these functions can create input fields labeled "Guess #1", etc., where the user can enter his/her guesses. As the user inputs text, they process it: they convert the text to uppercase and remove non-alphabetic characters. When the user inputs the fifth letter of a word, they remove the input field and create a Wordle guess out of the inputted word. The guess has all letters gray initially, and there are "edit" and "delete" buttons, with tooltips explaining their purpose, to the right of it. Event listeners are added to each of the five letters so that when they are clicked, they change from gray to yellow, yellow to green, or green to gray.
+
+> [!IMPORTANT]
+> Sometimes a letter, when clicked, will change from gray directly to green, or from green directly to yellow. This is because, as is explained in the user guide, there are situations in which a letter cannot be yellow, or black. Note that in Wordle, it is impossible for a guess that has two identical letters (for example, E's) to have the first E colored gray and the second E colored yellow. Thus Wordle Master prevents you from coloring a guess this way - it is a safety mechanism against inconsistent inputs.
+
+This file also keeps track of the when the user interface is "enabled", so that when there is an active input field (for entering a new word or editing an existing one), the user cannot select "Find Results", or start editing another word, or entering a new one, etc. At these times, when the user interface is "disabled", the "edit" and "delete" buttons are disabled and the "Find Results" button is hidden.
+
+As this file shows and hides DOM elements with CSS fairly frequently, there are functions `show()` and `hide()` to streamline this process.
+
+Finally, this file contains functions for reading the guesses themselves and their colors from the document, and displaying the results to the user. The colors of the five letters of each word are read into a five-character string, so if the first and fourth letters of a word were green, its third letter was yellow, and its second and fifth letters were gray, that word's "color string" would be `'gbygb'`, for 'green, black, yellow, green, black': this is always the format in which Wordle Master's functions represent colors.  
+The function `getWordsFromDoc()` reads the inputted words and their colors from the document into two arrays of equal length, and passes them to the function `getWords()` defined in `wordle.js` to get the actual results.  
+Highest in the hierarchy is `getResults()`, which is the function actually called when the user selects "Find Results". This function:
+- Calls `getWordsFromDoc()` to get the results themselves.
+- Reads the "sortmethod" radio input to determine the user's desired sorting method, and, if necessary, sorts the results by number of repeated letters.
+> [!NOTE]
+> Note that even if the results are sorted by number of repeated letters, within a section of the sorted array whose words all have the same number of repeated letters, the original sorted order will be preserved.
+- Splits the results into three arrays of equal length, and writes one array to each column of the `<div>` element reserved for the purpose.
+- Handles the showing of appropriate messages about the results, e.g. "No results found" or "Showing only the top 75 of [for example] 373 results".
