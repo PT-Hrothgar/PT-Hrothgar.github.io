@@ -11,7 +11,7 @@ This is what Wordle Master is designed for. You can go to [https://PT-Hrothgar.g
 Wordle Master is a front-end web application that runs entirely with client-side JavaScript. Here are its files.
 
 ##### index.html
-This is, of course, the main HTML file that defines the page itself. It links to all the other pages (`styles.css`, `words.js`, `wordle.js`, and `interface.js`) to get them working, defines the document tree and all the DOM elements that `interface.js` expects to find, and contains the user guide. It also links to my Font Awesome kit so that we can use FA icons on the "edit" and "delete" buttons. There is a copyright notice at the bottom of the page with a link to `about_license.html`, which itself contains a link to `LICENSE.txt`.
+This is, of course, the main HTML file that defines the page itself. It links to all the other files (`styles.css`, `words.js`, `wordle.js`, and `interface.js`) to get them working, defines the document tree and all the DOM elements that `interface.js` expects to find, and contains the user guide. It also links to my Font Awesome kit so that we can use FA icons on the "edit" and "delete" buttons. There is a copyright notice at the bottom of the page with a link to `about_license.html`, which itself contains a link to `LICENSE.txt`.
 
 I decided during development that if somebody is visiting Wordle Master with JavaScript disabled in their browser, because the page won't work at all, it should give them a warning rather than show a completely unfunctional page. Thus, in `styles.css`, the page's wrapper element (`<div id="content-js-only">`) is hidden by default, and it is only shown by JavaScript. The only internal JavaScript in `index.html` is a short little script that does just that, and there is a large `<noscript>` element that directs the user to enable JavaScript.
 
@@ -42,7 +42,7 @@ This file also contains a function, `repeatedLetters()`, that returns the number
 Here we have all the functions relating to the document, and particularly to the user interface. Among other things, these functions can create input fields labeled "Guess #1", etc., where the user can enter his/her guesses. As the user inputs text, they process it: they convert the text to uppercase and remove non-alphabetic characters. When the user inputs the fifth letter of a word, they remove the input field and create a Wordle guess out of the inputted word. The guess has all letters gray initially, and there are "edit" and "delete" buttons, with tooltips explaining their purpose, to the right of it. Event listeners are added to each of the five letters so that when they are clicked, they change from gray to yellow, yellow to green, or green to gray.
 
 > [!IMPORTANT]
-> Sometimes a letter, when clicked, will change from gray directly to green, or from green directly to yellow. This is because, as is explained in the user guide, there are situations in which a letter cannot be yellow, or black. Note that in Wordle, it is impossible for a guess that has two identical letters (for example, E's) to have the first E colored gray and the second E colored yellow. Thus Wordle Master prevents you from coloring a guess this way - it is a safety mechanism against inconsistent inputs.
+> Sometimes a letter, when clicked, will change from gray directly to green, or from green directly to yellow. This is because, as is explained in the user guide, there are situations in which a letter cannot be yellow, or gray. Note that in Wordle, it is impossible for a guess that has two identical letters (for example, E's) to have the first E colored gray and the second E colored yellow. Thus, Wordle Master prevents you from coloring a guess this way - it is a safety mechanism against inconsistent inputs.
 
 This file also keeps track of the when the user interface is "enabled", so that when there is an active input field (for entering a new word or editing an existing one), the user cannot select "Find Results", or start editing another word, or entering a new one, etc. At these times, when the user interface is "disabled", the "edit" and "delete" buttons are disabled and the "Find Results" button is hidden.
 
@@ -55,5 +55,21 @@ Highest in the hierarchy is `getResults()`, which is the function actually calle
 - Reads the "sortmethod" radio input to determine the user's desired sorting method, and, if necessary, sorts the results by number of repeated letters.
 > [!NOTE]
 > Note that even if the results are sorted by number of repeated letters, within a section of the sorted array whose words all have the same number of repeated letters, the original sorted order will be preserved.
-- Splits the results into three arrays of equal length, and writes one array to each column of the `<div>` element reserved for the purpose.
+- Splits the results into three arrays of equal length and writes one array to each column of the `<div>` element reserved for the purpose.
 - Handles the showing of appropriate messages about the results, e.g. "No results found" or "Showing only the top 75 of [for example] 373 results".
+
+##### about_license.html
+This short HTML file simply contains the sentence "The code for this website is licensed under the Apache License 2.0", with a hyperlink to LICENSE.txt.
+
+##### Image files: favicon.ico, mystery.png, sleep.png, wordlemaster.png, wordlemaster_mobile.png
+`favicon.ico` is the M on the green background that is the logo of Wordle Master.
+
+`mystery.png` contains the Wordle guesses STARE, DOING, and LUMPY as shown at the top of this README. It is used at the top of the user guide in the same way it is used here: to demonstrate a case where you would have a lot of trouble without Wordle Master.
+
+`sleep.png` contains the Wordle guess SLEEP colored impossibly: with the first E gray and the second E yellow. It is used in the user guide where it is explaining why such a coloring of a Wordle guess is impossible.
+
+`wordlemaster.png` is a screenshot of Wordle Master in action. It is used as the OGP image of the site, and is shown at the bottom of the user guide to show the solution to the STARE-DOING-LUMPY puzzle.
+
+`wordlemaster_mobile.png` is the same as the above image, except that the screenshot is of the one-column layout of Wordle Master used on mobile devices. It is used instead of `wordlemaster.png` on mobile devices, since it is less wide.
+
+**Happy Wordling, everybody!**
