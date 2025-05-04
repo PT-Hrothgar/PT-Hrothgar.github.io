@@ -110,6 +110,14 @@
     font-size: 18px;
 }
 
+#user-guide .warning {
+    background-color: var(--err-light-red);
+    border: 1px solid var(--err-dark-red);
+    border-radius: 6px;
+    padding: 25px;
+    margin: 30px 5px;
+}
+
 .heading-join-top {
     padding-bottom: 0 !important;
 }
