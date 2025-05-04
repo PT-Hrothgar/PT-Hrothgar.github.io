@@ -26,6 +26,10 @@ Here is all the not-super-interesting CSS that is so essential for the page layo
 ##### words.js
 All that this file does is define the two word lists used by the other files. They are `outputWords`, the 2,309-word array that corresponds to the list from which the Wordle target word is chosen each day, and from which all of Wordle Master's output words are taken, and `inputWords`, the 14,855-word array that is the list of valid guesses in Wordle. `inputWords` is only checked as the user inputs words, to determine whether or not to show a "Not in word list" warning. As is specified in the comments, `outputWords` is taken from [https://www.wordunscrambler.net/word-list/wordle-word-list](https://www.wordunscrambler.net/word-list/wordle-word-list), and `inputWords` is taken from [https://raw.githubusercontent.com/tabatkins/wordle-list/main/words](https://raw.githubusercontent.com/tabatkins/wordle-list/main/words).
 
+(This warning added after submission:)
+> [!WARNING]
+> Wordle itself does not seem to have an official published word list, so the one we use **is not perfect**. It is, I think, very similar to the list actually used by Wordle, but sometimes (as on April 21, 2025, when the word was SPATE), there is a Wordle target word that is not on it.
+
 Note that the output words are already sorted by how common their letters are. It seemed more efficient to pre-sort them so that when the results are chosen from them, they are already in sorted order, than to have to sort the results anew every single time before outputting them.
 
 > [!NOTE]
