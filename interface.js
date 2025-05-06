@@ -12,7 +12,7 @@ let enabled = true;
 // Number of words that currently exist
 let wordCount = 0;
 // Maximum number of words the user is allowed to input
-const MAX_WORDS = 8;
+const MAX_WORDS = 6;
 // Key-value pairs for all the properties common to all text inputs
 const INPUT_PROPERTIES = {
     autocomplete: 'off',
