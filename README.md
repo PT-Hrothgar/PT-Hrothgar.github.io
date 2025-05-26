@@ -24,13 +24,12 @@ Here is all the not-super-interesting CSS that is so essential for the page layo
 - Finally, it hides the page content's wrapper element (along with several other elements that will not be shown at first), so that it will only be shown when JavaScript is enabled.
 
 ##### words.js
-All that this file does is define the two word lists used by the other files. They are `outputWords`, the 2,309-word array that corresponds to the list from which the Wordle target word is chosen each day, and from which all of Wordle Master's output words are taken, and `inputWords`, the 14,855-word array that is the list of valid guesses in Wordle. `inputWords` is only checked as the user inputs words, to determine whether or not to show a "Not in word list" warning. As is specified in the comments, `outputWords` is taken from [https://www.wordunscrambler.net/word-list/wordle-word-list](https://www.wordunscrambler.net/word-list/wordle-word-list), and `inputWords` is taken from [https://raw.githubusercontent.com/tabatkins/wordle-list/main/words](https://raw.githubusercontent.com/tabatkins/wordle-list/main/words).
+All that this file does is define the two word lists used by the other files. They are `outputWords`, the 2,309-word array that corresponds to the list from which the Wordle target word is chosen each day, and from which Wordle Master's output words are taken by default, and `inputWords`, the 14,855-word array that is the list of valid guesses in Wordle. `inputWords` is checked as the user inputs words, to determine whether or not to show a "Not in word list" warning. As is specified in the comments, `outputWords` is taken from [https://www.wordunscrambler.net/word-list/wordle-word-list](https://www.wordunscrambler.net/word-list/wordle-word-list), and `inputWords` is taken from [https://raw.githubusercontent.com/tabatkins/wordle-list/main/words](https://raw.githubusercontent.com/tabatkins/wordle-list/main/words).
 
-(This warning added after submission:)
 > [!WARNING]
 > Wordle itself does not seem to have an official published word list, so the one we use **is not perfect**. It is, I think, very similar to the list actually used by Wordle, but sometimes (as on April 21, 2025, when the word was SPATE), there is a Wordle target word that is not on it.
 
-Note that the output words are already sorted by how common their letters are. It seemed more efficient to pre-sort them so that when the results are chosen from them, they are already in sorted order, than to have to sort the results anew every single time before outputting them.
+Note that both word lists are already sorted by how common their letters are. It seemed more efficient to pre-sort them so that when the results are chosen from them, they are already in sorted order, than to have to sort the results anew every single time before outputting them.
 
 > [!NOTE]
 > By the way, this is what I officially mean by sorting the words by "how common their letters are": Each letter of the alphabet is assigned a "point value" based on how commonly it appears in dictionaries, and each word is assigned a point value equal to the sum of the point values of its letters. Finally, the words are sorted by descending point value. (I did this sorting once and for all a while ago with a Python script.)
@@ -55,7 +54,8 @@ As this file shows and hides DOM elements with CSS fairly frequently, there are 
 Finally, this file contains functions for reading the guesses themselves and their colors from the document, and displaying the results to the user. The colors of the five letters of each word are read into a five-character string, so if the first and fourth letters of a word were green, its third letter was yellow, and its second and fifth letters were gray, that word's "color string" would be `'gbygb'`, for 'green, black, yellow, green, black': this is always the format in which Wordle Master's functions represent colors.  
 The function `getWordsFromDoc()` reads the inputted words and their colors from the document into two arrays of equal length, and passes them to the function `getWords()` defined in `wordle.js` to get the actual results.  
 Highest in the hierarchy is `getResults()`, which is the function actually called when the user selects "Find Results". This function:
-- Calls `getWordsFromDoc()` to get the results themselves.
+- Reads the `which-results` radio input to determine which word list to use for the results.
+- Calls `getWordsFromDoc()` with that word list to get the results themselves.
 - Reads the "sortmethod" radio input to determine the user's desired sorting method, and, if necessary, sorts the results by number of repeated letters.
 > [!NOTE]
 > Note that even if the results are sorted by number of repeated letters, within a section of the sorted array whose words all have the same number of repeated letters, the original sorted order will be preserved.
