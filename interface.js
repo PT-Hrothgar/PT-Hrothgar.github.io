@@ -116,14 +116,18 @@ function readWord(word) {
   Read the inputted words from the document, and the color of each letter,
   and return an array of all the possible words that would produce those
   colors for those guesses.
+  Use the word list specified in the 'which-results' radio input.
 */
 function getWordsFromDoc() {
     // All the words the user has inputted
-    const words = [];
-    // All the five-letter sets of colors (e.g. 'ygbbg')
-    const colors = [];
-    // The DOM objects representing the words
-    const domWords = document.getElementsByClassName('word');
+    const words = [],
+        // All the five-letter sets of colors (e.g. 'ygbbg')
+        colors = [],
+        // The DOM objects representing the words
+        domWords = document.getElementsByClassName('word'),
+        // The word list to use
+        wordList = (document.querySelector('input[name="which-results"]:checked').value ===
+            'out' ? outputWords : inputWords).slice();
 
     // Loop through the words
     for (let word of domWords) {
@@ -147,7 +151,7 @@ function getWordsFromDoc() {
         }
     }
 
-    return getWords(words, colors);
+    return getWords(words, colors, wordList);
 }
 
 /*
