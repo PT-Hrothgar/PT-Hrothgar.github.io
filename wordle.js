@@ -101,8 +101,9 @@ function matchesGuesses(word, guesses, colors) {
 /*
   Return an array of all the words that would produce
   the given colors for the given guesses as feedback.
+  Take results from the given word list.
 */
-function getWords(guesses, colors) {
+function getWords(guesses, colors, wordList) {
     // Ensure that there are the same number of sets of colors as guesses
     if (guesses.length != colors.length) {
         throw 'There must be the same number of guesses as sets of colors';
@@ -111,9 +112,8 @@ function getWords(guesses, colors) {
     // Array of result words
     const result = [];
 
-    // Loop through all the words that are possible target words in Wordle.
-    // (They are defined in the array 'outputWords' in words.js.)
-    for (let word of outputWords) {
+    // Loop the given word list
+    for (let word of wordList) {
         if (matchesGuesses(word, guesses, colors)) {
             // Record this word, as it is a possibility.
             result.push(word);
