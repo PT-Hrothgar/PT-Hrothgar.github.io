@@ -268,6 +268,9 @@ noscript {
     width: 50%;
     position: absolute;
     top: 0;
+}
+
+#words-div, #output-div, #output1, #output2, #output3, #footer, .tooltiptext {
     box-sizing: border-box;
 }
 
@@ -279,7 +282,7 @@ noscript {
 #output-div {
     border: 1px solid black;
     left: 50%;
-    height: 592px;
+    height: 600px;
     overflow-x: clip;
     overflow-y: auto;
 }
@@ -287,8 +290,11 @@ noscript {
 #output1, #output2, #output3 {
     width: 33%;
     position: absolute;
-    box-sizing: border-box;
     padding: 8px;
+}
+
+#output1 {
+    left: 0;
 }
 
 #output2 {
@@ -304,7 +310,6 @@ noscript {
     background-color: #fafafa;
     color: var(--green);
     font-size: 10px;
-    box-sizing: border-box;
 }
 
 #footer a {
@@ -322,7 +327,7 @@ noscript {
 #grid-container {
     position: relative;
     margin: 30px;
-    height: 715px;
+    height: 750px;
 }
 
 #word-grid {
@@ -353,6 +358,49 @@ noscript {
 .mobile-only {
     display: none;
     visibility: hidden;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  z-index: 1;
+  position: absolute;
+  top: -3px;
+  bottom: auto;
+  right: 22px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  font-size: 11px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #555;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+#overflow {
+    padding: 6px;
 }
 
 @media screen and (max-width: 900px) {
