@@ -80,6 +80,10 @@
     text-align: center;
 }
 
+h3 {
+    font-size: 19px;
+}
+
 #to-user-guide {
     text-decoration: underline;
     cursor: pointer;
@@ -284,7 +288,7 @@ noscript {
 #output-div {
     border: 1px solid black;
     left: 50%;
-    height: 600px;
+    height: 38rem;
     overflow-x: clip;
     overflow-y: auto;
 }
@@ -433,7 +437,6 @@ noscript {
 
     #output-div {
         margin-top: 10px;
-        height: 530px;
     }
 
     .no-mobile {
@@ -481,6 +484,7 @@ noscript {
 html {
     touch-action: pan-x pan-y;
     height: 100%;
+    font-size: 14px;
 }
 
 body {
