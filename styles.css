@@ -148,6 +148,7 @@ label {
     background-color: var(--green);
     border: none;
     cursor: pointer;
+    color: black;
     padding: 12px;
     width: 150px;
 }
