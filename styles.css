@@ -288,7 +288,7 @@ noscript {
 #output-div {
     border: 1px solid black;
     left: 50%;
-    height: 40rem;
+    height: 40.9rem;
     overflow-x: clip;
     overflow-y: auto;
 }
