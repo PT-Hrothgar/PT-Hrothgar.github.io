@@ -1,0 +1,494 @@
+/* Import Google fonts */
+@import url("https://fonts.googleapis.com/css?family=Encode%20Sans%20Expanded");
+@import url("https://fonts.googleapis.com/css?family=Noto%20Sans%20Mono");
+
+/* Match Wordle's own gray, yellow, and green colors */
+@property --gray {
+    syntax: "<color>";
+    initial-value: #787c7e;
+    inherits: false;
+}
+
+@property --yellow {
+    syntax: "<color>";
+    initial-value: #c9b458;
+    inherits: false;
+}
+
+@property --green {
+    syntax: "<color>";
+    initial-value: #6aaa64;
+    inherits: false;
+}
+
+@property --err-light-red {
+    syntax: "<color>";
+    initial-value: #fdd;
+    inherits: false;
+}
+
+@property --err-mid-red {
+    syntax: "<color>";
+    initial-value: #fcc;
+    inherits: false;
+}
+
+@property --err-dark-red {
+    syntax: "<color>";
+    initial-value: #f55;
+    inherits: false;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    font-family: 'Noto Sans Mono', monospace;
+    font-weight: bold;
+    background-color: var(--gray);
+    padding: 15px 5px;
+    color: white;
+    font-size: 38px;
+    letter-spacing: 2px;
+}
+
+#header a {
+    text-decoration: none;
+    color: white;
+}
+
+#header .color-div {
+    border-color: var(--gray);
+    font-size: inherit;
+}
+
+#header-tiles {
+    margin-left: 10px;
+    letter-spacing: initial;
+}
+
+#user-guide {
+    margin: 10px auto 25px;
+    text-align: left;
+    width: min(95%, 900px);
+}
+
+.img-container {
+    margin: 10px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 19px;
+}
+
+#to-user-guide {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #00e;
+}
+
+#user-guide h1, #user-guide h2 {
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+#user-guide h1, #user-guide h2, #user-guide h6 {
+    text-align: center;
+}
+
+#user-guide h1, #user-guide h2, #user-guide h6, #user-guide p {
+    padding: 10px;
+    line-height: 150%;
+}
+
+#user-guide h1 {
+    font-size: 35px;
+}
+
+#user-guide h2 {
+    font-size: 30px;
+}
+
+#user-guide h6 {
+    font-size: 18px;
+}
+
+#user-guide .warning {
+    background-color: var(--err-light-red);
+    border: 1px solid var(--err-dark-red);
+    border-radius: 6px;
+    padding: 25px;
+    margin: 30px 5px;
+}
+
+.heading-join-top {
+    padding-bottom: 0 !important;
+}
+
+.heading-join-bottom {
+    padding-top: 0 !important;
+}
+
+label {
+    font-size: 12px;
+}
+
+.radio-container {
+    margin: auto;
+    width: fit-content;
+    padding: 8px;
+}
+
+.radio-container p {
+    text-align: left;
+}
+
+#find-results {
+    margin: 12px;
+}
+
+#find-results button {
+    background-color: var(--green);
+    border: none;
+    cursor: pointer;
+    color: black;
+    padding: 12px;
+    width: 150px;
+}
+
+#find-results button:hover {
+    background-color: #7b7;
+}
+
+.word {
+    position: relative;
+}
+
+.word-input, .color-div {
+    font-size: 34px;
+    padding: 3px 18px;
+}
+
+.color-div {
+    display: inline-block;
+    color: white;
+    border: 2px solid white;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard */
+}
+
+.word-warning {
+    width: 200px;
+    margin-left: -127px;
+    margin-bottom: 6px;
+    background-color: var(--err-mid-red);
+    color: var(--err-dark-red);
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    opacity: 1;
+    font-size: 18px;
+    font-family: 'Encode Sans Expanded', Verdana, arial;
+}
+
+.word-warning::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    margin-right: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: var(--err-mid-red) transparent transparent transparent;
+}
+
+.warning-dismiss {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -14px;
+    margin-left: 7px;
+}
+
+.warning-dismiss:hover {
+    color: #111;
+}
+
+#add-word {
+    margin-right: 315px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+#add-word, #demo-add-word {
+    background-color: white;
+    color: black;
+    border-color: black;
+}
+
+#demo-add-word {
+    display: inline-block;
+    font-size: 34px;
+    padding: 10px 12px;
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.yellow {
+    background-color: var(--yellow);
+}
+
+.gray {
+    background-color: var(--gray);
+}
+
+.noscript {
+    padding-top: 20px;
+    border: 1px solid var(--err-mid-red);
+    background-color: var(--err-light-red);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+noscript {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+}
+
+#words-div, #output-div {
+    width: 50%;
+    position: absolute;
+    top: 0;
+}
+
+#words-div, #output-div, #output1, #output2, #output3, #footer, .tooltiptext {
+    box-sizing: border-box;
+}
+
+#words-div {
+    left: 0;
+    padding-right: 30px;
+}
+
+#output-div {
+    border: 1px solid black;
+    left: 50%;
+    height: 40.9rem;
+    overflow-x: clip;
+    overflow-y: auto;
+}
+
+#output1, #output2, #output3 {
+    width: 33%;
+    position: absolute;
+    padding: 8px;
+}
+
+#output1 {
+    left: 0;
+}
+
+#output2 {
+    left: 33%;
+}
+
+#output3 {
+    left: 66%;
+}
+
+#footer {
+    width: 100%;
+    background-color: #fafafa;
+    color: var(--green);
+    font-size: 10px;
+}
+
+#footer a {
+    color: inherit;
+}
+
+#footer a:visited {
+    color: inherit;
+}
+
+#footer, #output-div {
+    padding: 20px;
+}
+
+#grid-container {
+    position: relative;
+    margin: 30px;
+    height: 750px;
+}
+
+#word-grid {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Noto Sans Mono', monospace;
+    font-weight: bold;
+}
+
+.word .far {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    position: relative;
+    bottom: 8px;
+}
+
+.no-click {
+    color: lightgray;
+    cursor: not-allowed !important;
+}
+
+.no-mobile {
+    display: block;
+    visibility: visible;
+}
+
+.mobile-only {
+    display: none;
+    visibility: hidden;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  z-index: 1;
+  position: absolute;
+  top: -3px;
+  bottom: auto;
+  right: 22px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  font-size: 11px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #555;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+#overflow {
+    padding: 6px;
+}
+
+@media screen and (max-width: 900px) {
+    noscript {
+        top: 25%;
+        height: 60%;
+    }
+
+    #grid-container {
+        height: auto;
+        margin: 30px auto;
+        width: 93%;
+    }
+
+    #words-div, #output-div {
+        width: auto;
+        position: static;
+    }
+
+    #words-div {
+        padding-right: 0;
+    }
+
+    #header-tiles {
+        display: block;
+        margin: 0;
+    }
+
+    #output-div {
+        margin-top: 10px;
+    }
+
+    .no-mobile {
+        display: none;
+        visibility: hidden;
+    }
+
+    .mobile-only {
+        display: block;
+        visibility: visible;
+    }
+
+    #header, #header p, .color-div, .word-input {
+        font-size: 28px;
+    }
+
+    .color-div {
+        padding: 3px 16px;
+    }
+
+    .word .far {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    #add-word {
+        margin-right: 272px;
+    }
+
+    #output1, #output2, #output3, p {
+        font-size: 14px;
+    }
+}
+
+#content-js-only, #show-after-input, #add-word, #no-words-found, #go, #overflow {
+    display: none;
+    visibility: hidden;
+}
+
+#no-words-found {
+    color: var(--gray);
+    margin: 8px;
+}
+
+html {
+    touch-action: pan-x pan-y;
+    height: 100%;
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Encode Sans Expanded', Verdana, arial;
+    text-align: center;
+    overflow-x: clip;
+}

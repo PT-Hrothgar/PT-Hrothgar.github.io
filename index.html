@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta name="description" content="Get help solving the popular online game Wordle. Enter the guesses you've made and select a color for each letter to find all the different possibilities for the word you're trying to guess.">
+        <meta name="keywords" content="Wordle, solver, free">
+        <meta property="og:title" content="Wordle Master">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://PT-Hrothgar.github.io/">
+        <meta property="og:description" content="Get help solving the popular online game Wordle. Enter the guesses you've made and select a color for each letter to find all the different possibilities for the word you're trying to guess.">
+        <meta property="og:image" content="https://PT-Hrothgar.github.io/wordlemaster.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="1024">
+        <meta property="og:image:height" content="455">
+        <meta property="og:image:alt" content="Wordle Master at work">
+        <title>Wordle Master</title>
+        <link rel="stylesheet" href="styles.css?x=901343">
+        <script src="https://kit.fontawesome.com/9656c36908.js" crossorigin="anonymous"></script>
+        <script src="words.js?x=901343"></script>
+        <script src="wordle.js?x=901343"></script>
+        <script src="interface.js?x=901343"></script>
+    </head>
+
+    <body>
+        <div id="content-js-only">
+            <header id="header">
+                <p><a href="/">WORDLE<span id="header-tiles"><span class="color-div green">M</span><span class="color-div green">A</span><span class="color-div green">S</span><span class="color-div green">T</span><span class="color-div green">E</span><span class="color-div green">R</span></span></a></p>
+            </header>
+
+            <div id="grid-container">
+                <section id="words-div">
+                    <h3>Enter the guesses you&#8217;ve made:</h3>
+                    <div id="word-grid">
+                        <div class="color-div" id="add-word" title="Add word">+</div>
+                    </div>
+                    <p id="show-after-input">Click any letter to change its color.</p>
+                    <div id="go">
+                        <br><hr><br>
+                        <p>Take results from:</p>
+
+                        <div class="radio-container">
+                            <p>
+                                <input checked="" id="third" name="which-results" type="radio" value="out">
+                                <label for="third">List of probable target words (2,309 words)</label>
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span class="tooltiptext">Give me the most likely suspects.</span>
+                                </span>
+                            </p>
+                            <p>
+                                <input id="fourth" name="which-results" type="radio" value="in">
+                                <label for="fourth">List of valid guesses (14,855 words)</label>
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span class="tooltiptext">Give me more options.</span>
+                                </span>
+                            </p>
+                        </div>
+
+                        <br>
+
+                        <p>Sort results by:</p>
+
+                        <div class="radio-container">
+                            <p>
+                                <input checked id="first" name="sortmethod" type="radio" value="no">
+                                <label for="first">Words with common letters first</label>
+                            </p>
+                            <p>
+                                <input id="second" name="sortmethod" type="radio" value="yes">
+                                <label for="second">Words with no repeated letters first, then sorted as above</label>
+                            </p>
+                        </div>
+
+                        <p id="find-results"><button>FIND RESULTS</button></p>
+                        <br><hr><br>
+                    </div>
+                    <p>If you have any questions, please see the <span id="to-user-guide">User Guide</span> below.</p>
+                </section>
+
+                <section id="output-div">
+                    <h3>Possible Words</h3>
+                    <p id="no-words-found">No results found. Please check your inputs and try again!</p>
+                    <div id="words-found">
+                        <p id="overflow">Showing only the top 75 of <span id="overflow-no"></span> results.</p>
+                        <div id="output1"></div>
+                        <div id="output2"></div>
+                        <div id="output3"></div>
+                    </div>
+                </section>
+            </div>
+
+            <hr>
+
+            <section id="user-guide">
+                <h1>ABOUT WORDLE MASTER</h1>
+                <p>Wordle Master was made for all ordinary Wordle players who have ever just felt stuck several guesses into a game: for anyone who has run out of ideas for guesses and felt stumped.</p>
+                <p>For example, hypothetically speaking, if your first three guesses looked like this, would you be able to easily think of a good Guess #4?</p>
+
+                <div class="img-container">
+                    <img alt="Wordle guesses STARE, DOING, and LUMPY" height="124" src="mystery.png" width="221">
+                </div>
+
+                <p>With Wordle Master, this would be a cinch. Just type in those three words above and select a color for each letter: you can immediately find the one possibility for this particular target word.</p>
+                <p>No need to look through your guesses and figure out which letters are green, which ones are gray, which ones used to be yellow, which ones are still yellow—just type in your guesses exactly as you would into Wordle itself, and then click each letter to change its color.</p>
+
+                <br><hr><br>
+
+                <h2>HOW TO USE</h2>
+                <p>Type your first guess into the input field at the top of this page labeled &#8220;Guess #1.&#8221;</p>
+                <p>If you have more guesses to add, click the button with a plus sign <span class="color-div" id="demo-add-word">+</span> that is beneath the words to add a new word, as many times as you like.</p>
+                <p>All the letters will be gray by default. To change the color of a letter, click on it to change it from gray to yellow, yellow to green, or green to gray. (There are occasionally exceptions to this: sometimes a letter cannot be yellow, or gray. An explanation of this is below.)</p>
+                <p>To change the letters of a word, use the &#8220;edit&#8221; button <i class="far fa-edit"></i> to the right of the word.</p>
+                <p>To remove a word entirely, use the &#8220;delete&#8221; button <i class="far fa-trash-alt"></i> to the right of the word.</p>
+                <p>When you&#8217;re ready, change the sorting method if you like, and then click &#8220;Find Results&#8221; to find all the possibilities for the target word!</p>
+
+                <br><hr><br>
+
+                <h2 class="heading-join-top">SORTING METHODS</h2>
+                <h6 class="heading-join-bottom">How are the output words sorted?</h6>
+                <p>You may notice that you have two options for how to sort the output words: &#8220;Words with common letters first&#8221; and &#8220;Words with no repeated letters first, then sorted as above.&#8221; Here&#8217;s a much more detailed explanation of what those two options mean.</p>
+                <p>By default, the words are sorted by how common, overall, their letters are. To be precise, each letter of the alphabet is assigned a &#8220;point value&#8221; based on how frequently it appears in dictionaries. Then each word is assigned a point value equal to the sum of the values of its letters. Finally, the words are sorted by point value.</p>
+                <p>For example, since E, A, and S are some of the most common letters, words like ARISE and STARE will end up very near the top of the list.</p>
+                <p>So that&#8217;s all that &#8220;Words with common letters first&#8221; means: the normal, default sorting method.</p>
+                <p>However, some of the very top words according to this method, such as &#8220;EERIE,&#8221; would not actually be good guesses for Wordle at all. Why? Because if you guessed &#8220;EERIE,&#8221; you would only be getting information about three different letters (E, R, and I), but you probably want to get information about as many different letters as possible. You want to guess a word with five different letters, if you can.</p>
+                <p>Hence the alternative sorting method. When you select &#8220;Words with no repeated letters first, then sorted as above,&#8221; the output words will first be sorted by number of repeated letters. Thus, all the words with five different letters will come first, then all those with one repeated letter, and so on. Only within each of these sections will the words be sorted using the ordinary method.</p>
+
+                <br><hr><br>
+
+                <h2 class="heading-join-top">LETTER COLORS</h2>
+                <h6 class="heading-join-bottom">Why can&#8217;t I turn a letter yellow/gray?</h6>
+                <p>The short answer is that it&#8217;s a safety measure to help keep you from entering impossible inputs.</p>
+                <p>Wordle Master won&#8217;t let you turn a letter yellow if the same letter is gray earlier on in the word, and, similarly, you won&#8217;t be able to turn a letter gray if the same letter is yellow later on in the word. This is because such feedback is impossible to receive in Wordle.</p>
+
+                <div class="img-container">
+                    <img alt="SLEEP with the second E yellow and the other letters gray" height="59" src="sleep.png" width="304">
+                    <p class="heading-join-bottom"><small>Impossible!</small></p>
+                </div>
+
+                <p>Let&#8217;s say your guess has two E&#8217;s in it. There are only three possibilities:</p>
+
+                <ol>
+                    <li><p>There are two (or more) E&#8217;s in the target word as well, in which case both E&#8217;s in your guess would be colored: neither of them would be gray.</p></li>
+                    <li><p>There are no E&#8217;s in the target word, in which case both E&#8217;s in your guess would be gray.</p></li>
+                    <li><p>There is one E in the target word. If this E is in the same position as one of the E&#8217;s in your guess, then that E will be green, and the other one will be gray. Otherwise, the <em>first</em> E will always be yellow, and the second will be gray.</p></li>
+                </ol>
+
+                <p>But under no conditions will the <em>first</em> E be gray while the second is yellow, and this is why you may not always have complete freedom when selecting colors.</p>
+
+                <br><hr><br>
+
+                <p>Thus, Wordle Master will catch and prevent any inconsistencies in your input that are within a single word. But you can still input inconsistencies that are across multiple words. For example, you could input two words that both have an E, and turn the E in the first word green while leaving the E in the second word gray. Wordle Master won&#8217;t catch that; it&#8217;ll just output &#8220;No results.&#8221;</p>
+
+                <br><hr><br>
+
+                <h2>WORD LISTS</h2>
+                <p>Just like Wordle itself, Wordle Master uses two word lists. The first, of 2,309 words, corresponds to the list from which the Wordle target word is chosen each day. It is from this list that all of Wordle Master&#8217;s output words are taken.</p>
+
+                <!-- Edited after submission to add this warning: -->
+                <p class="warning">
+                    However, Wordle does not have an official published word list. Our word list is <em>very similar</em> to the list actually used by Wordle, but it is not perfect. Not one, but several times recently, the Wordle word has not been on our list, and another such incident is always possible.
+                </p>
+
+                <p>For this reason, Wordle Master also gives you the option to take the outputted words from the second list, described below. You&#8217;ll probably get a lot of strange results that will never actually be the target word, but the target word itself is practically guaranteed to be among them.</p>
+
+                <p>The other list is much longer: 14,855 words. It is the list of valid guesses in Wordle. They&#8217;ll let you <em>guess</em> words like &#8220;AAHED&#8221; (meaning &#8220;screamed&#8221;; it is the past tense of &#8220;AAH&#8221;) and &#8220;YOYOS,&#8221; but they&#8217;ll never make the target word anything like that.</p>
+
+                <p>Wordle Master checks your input words against this list too. However, it won&#8217;t actually prevent you from entering in a non-word; you&#8217;ll be given a warning, but you&#8217;ll still be able to select &#8220;Find Results,&#8221; just as always.</p>
+
+                <br><hr><br>
+
+                <div class="img-container">
+                    <p class="heading-join-top"><small>Here&#8217;s the solution to the above hypothetical Wordle game:</small></p>
+                    <img alt="Wordle Master finding the solution CYBER to a tricky Wordle game" class="no-mobile" height="341" src="wordlemaster.png" width="768">
+                    <img alt="Wordle Master finding the solution CYBER to a tricky Wordle game" class="mobile-only" height="551" src="wordlemaster_mobile.png" width="312">
+                </div>
+
+                <br><hr><br>
+
+                <h6>Happy Wordling, everybody!</h6>
+            </section>
+
+            <footer id="footer">
+                Copyright © 2025 by Philip E. Turner. <a href="about_license.html">License</a><br>
+                We do not use any cookies, or collect or store any information. (This is a static website.)
+            </footer>
+        </div>
+
+        <noscript>
+            <div class="noscript">
+                <div class="img-container">
+                    <img alt="" height="64" src="favicon.ico" width="64">
+                </div>
+                <h2>We need JavaScript in order to run!</h2><br>
+                <p>Please enable JavaScript for this site in your browser settings to enjoy Wordle Master.</p>
+            </div>
+        </noscript>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // This webpage is so reliant on JavaScript that the main content is
+                // hidden by default, and is only shown when JavaScript is enabled.
+                show(document.getElementById('content-js-only'));
+            });
+        </script>
+    </body>
+</html>
