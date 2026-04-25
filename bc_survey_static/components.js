@@ -44,16 +44,90 @@ function find(title, id) {
   }
 }
 
+function post(path, args, callback) {
+    let query = '', start = true;
+    for (let a in args) {
+        if (!start) {
+            query += '&';
+        }
+        start = false;
+        query += encodeURIComponent(a) + '=' + encodeURIComponent(args[a]);
+    }
+    const req = new XMLHttpRequest();
+    req.onload = function() {
+        callback(this);
+    }
+    ;
+    req.open('POST', path, true);
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    req.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+    req.send(query);
+}
+
+function getCookie(name) {
+    const val = name + '=', cookies = decodeURIComponent(document.cookie).split(';');
+    for (let c of cookies) {
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(val.length, c.length);
+        }
+    }
+    return '';
+}
+
+function startSuggestions(word, path) {
+  const
+    input = document.getElementById('id_' + word),
+    suggestion = document.getElementById(word + '_suggestion'),
+    accept = document.getElementById(word + '_accept'),
+    reject = document.getElementById(word + '_reject');
+
+  if (input !== null) {
+    input.addEventListener('input', function() {
+      if (this.value) {
+        post(path, {content: this.value}, function(response) {
+          if (response.status === 200) {
+            if (response.responseText == input.value) {
+              suggestion.innerHTML = '';
+            } else {
+              suggestion.innerHTML = response.responseText;
+            }
+          }
+        });
+      } else {
+        suggestion.innerHTML = '';
+      }
+    });
+  }
+  if (accept !== null) {
+    accept.addEventListener('click', function() {
+      if (suggestion.innerHTML) {
+        input.value = suggestion.innerHTML;
+        suggestion.innerHTML = '';
+        input.focus();
+      }
+    });
+  }
+  if (reject !== null) {
+    reject.addEventListener('click', function() {
+      suggestion.innerHTML = '';
+      input.focus();
+    })
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   for (let acc of document.getElementsByClassName('accordion')) {
     acc.addEventListener('click', function() {
-      this.classList.toggle('active');
-
       const panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
+      if (this.classList.contains('active')) {
         panel.style.maxHeight = null;
+        this.classList.remove('active');
       } else {
         panel.style.maxHeight = panel.scrollHeight + 'px';
+        this.classList.add('active');
       } 
     });
   }
@@ -62,5 +136,28 @@ document.addEventListener('DOMContentLoaded', function() {
     let next = elem.nextSibling, spacer = document.createElement('span');
     spacer.classList.add('accordion-spacer');
     elem.parentNode.insertBefore(spacer, next);
+  }
+  for (let x of document.querySelectorAll('form.confirm-submit')) {
+    x.addEventListener('submit', function(e) {
+      const title = document.querySelector(x.getAttribute('data-target')).getAttribute('data-label');
+      if (!confirm('Are you sure you want to delete your nomination "' + title + '"?')) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  startSuggestions('title', capitalizeTitleUrl);
+  startSuggestions('author', capitalizeAuthorUrl);
+
+  let s = document.getElementById('id_sortmethod');
+  if (s !== null) {
+    s.addEventListener('change', function() {this.form.submit()});
+  }
+
+  if (document.getElementsByClassName('re-nominate').length) {
+    for (let e of document.getElementsByClassName('re-nominate-only')) {
+      e.style.display = 'block';
+      e.style.visibility = 'visible';
+    }
   }
 });
