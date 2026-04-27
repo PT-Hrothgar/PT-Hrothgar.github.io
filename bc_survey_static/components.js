@@ -139,8 +139,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   for (let x of document.querySelectorAll('form.confirm-submit')) {
     x.addEventListener('submit', function(e) {
-      const title = document.querySelector(x.getAttribute('data-target')).getAttribute('data-label');
-      if (!confirm('Are you sure you want to delete your nomination "' + title + '"?')) {
+      const title = x.getAttribute('data-target');
+      const prompt = (title === null) ? 'Are you sure you want to delete your comment?' : 'Are you sure you want to delete your nomination "' + document.querySelector(title).getAttribute('data-label') + '"?';
+      if (!confirm(prompt)) {
         e.preventDefault();
       }
     });
